@@ -1,0 +1,15 @@
+.students-list {
+
+  tbody tr {
+    transition: .25s;
+    &:hover {
+      background-color: #b8d5f5;
+    }
+  }
+
+  &__ {
+    &caption {
+      caption-side: top;
+    }
+  }
+}
