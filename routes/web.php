@@ -21,4 +21,5 @@ Route::get("/", [StudentController::class, "index"])->name("list");
 
 Route::get("/student", [StudentController::class, "show"])->name("student");
 
-Route::post("/student", "StudentController@student");
+Route::post("/student", [StudentController::class, "store"]);
+Route::post("/student/edit", [StudentController::class, "update"]);

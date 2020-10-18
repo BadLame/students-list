@@ -19,7 +19,7 @@ class AuthByCookie
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->session()->get("authenticated"))
+        if (session("authenticated"))
             return $next($request);
 
         $token = $request->cookie("token", false);

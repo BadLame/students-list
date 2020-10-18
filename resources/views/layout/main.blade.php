@@ -22,7 +22,7 @@
   </div>
 
 </div>
+
 @stack("scripts")
-{{--{{ dd($query) }}--}}
 </body>
 </html>

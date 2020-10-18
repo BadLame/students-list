@@ -4,16 +4,18 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class PagerRow extends Component
+class StudentForm extends Component
 {
+    public ?array $student;
+
     /**
      * Create a new component instance.
      *
-     * @return void
+     * @param array|null $student
      */
-    public function __construct()
+    public function __construct(?array $student)
     {
-        //
+        $this->student = $student;
     }
 
     /**
@@ -23,6 +25,6 @@ class PagerRow extends Component
      */
     public function render()
     {
-        return view('components.pager-row');
+        return view('components.student-form');
     }
 }

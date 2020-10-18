@@ -4,33 +4,40 @@
       Отображено {{ count($students) }} студентов
     @else
       Найдено {{ $students->total() }} студентов
+      <a class="btn-link" href="{{ route("list") }}">Сбросить поиск</a>
     @endif
   </caption>
+
   <thead class="bg-primary text-white">
   <tr>
-    <th scope="col">
-      <a href="#">
-        Имя
-{{--         {{ current ? (asc ? "▼" : "▲") : "" }}--}}
-      </a>
-    </th>
-    <th scope="col">Фамилия</th>
-    <th scope="col">Номер группы</th>
-    <th scope="col">Баллов</th>
+    @foreach(["name" => "Имя", "surname" => "Фамилия", "group" => "Группа", "points" => "Баллы"] as $col => $col_name)
+      <th scope="col">
+        <a class="text-white" href="{{ $cols_data[$col]["url"] }}">
+          {{ $col_name }}
+          {{ $cols_data[$col]["current"] ? ($cols_data[$col]["sort_order"] === "asc" ? "▼" : "▲") : "" }}
+        </a>
+      </th>
+    @endforeach
   </tr>
   </thead>
+
   <tbody>
-  @foreach($students as $student)
+  @forelse($students as $student)
     <tr>
       @foreach(["name", "surname", "group", "points"] as $key)
         <td>{{ $student[$key] }}</td>
       @endforeach
     </tr>
-  @endforeach
+  @empty
+    <tr style="background-color: inherit">
+      <td colspan="4" class="text-center text-muted">
+        {{ !empty($search) ? "По вашему запросу не найдено ни одного студента" : "Список пуст" }}</td>
+    </tr>
+  @endforelse
   </tbody>
 </table>
 
-{!! $pagination !!}
+{!! $pagination_html !!}
 
 @if(!empty($search))
   @push("scripts")
